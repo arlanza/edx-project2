@@ -5,9 +5,14 @@
 {% endblock %}
 
 {% block body %}
-  <h1 id="loginname"></h1>
+  <span id="loginname" class="label label-primary"></span>
   <form id="form-loginname" >
-    <input id="text-loginname" autocomplete="off" autofocus placeholder="Enter login name" type="text">
-    <input id="submit-loginname" type="submit">
+        <div class="form-group">
+            <label for="name">Hello, It's the fist time you enter this page. Please, choose a name: </label>
+            <input id="text-loginname" class="form-control" autocomplete="off" autofocus placeholder="Enter login name" type="text">
+        </div>
+        <div class="form-group">
+          <input id="submit-loginname" class="btn btn-primary" type="submit">
+        </div>
   </form>
 {% endblock %}

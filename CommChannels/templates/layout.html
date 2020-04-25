@@ -5,12 +5,55 @@
         <title>{% block title %}{% endblock %}</title>
         <meta charset="utf-8">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"  crossorigin="anonymous">
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+        <!--
         <script src="{{ url_for('static', filename='commchannels.js') }}"></script>
+        -->
+        <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+          // Login firt time access
+          if (!localStorage.getItem('loginname')){
+
+            //First time access
+
+            //Form to login visible
+            document.querySelector('#layout').querySelector("#form-loginname").style.visibility = "visible";
+
+            // By default, submit button is disabled. Enable if there's text name
+            document.querySelector('#submit-loginname').disabled = true;
+
+            document.querySelector('#text-loginname').onkeyup = () => {
+                if (document.querySelector('#text-loginname').value.length > 0)
+                  document.querySelector('#submit-loginname').disabled = false;
+                else
+                  document.querySelector('#submit-loginname').disabled = true;
+            }
+
+            // Get text-loginname and set at localStorage
+            document.querySelector('#layout').querySelector("#form-loginname").onsubmit = () => {
+                localStorage.setItem('loginname', document.querySelector('#text-loginname').value);
+
+                document.querySelector('#layout').querySelector("#form-loginname").style.visibility = "hidden";
+
+            }
+          } else {
+            // It's not first time access
+            document.querySelector('#layout').querySelector("#form-loginname").style.visibility = "hidden";
+          }
+
+          // Display the loginname
+          if ( localStorage.getItem('loginname') !== null)
+            document.querySelector('#loginname').innerHTML = "Hello, " + localStorage.getItem('loginname') + "!!";
+
+
+        });
+        </script>
+
+
       </head>
       <body>
-        <div id="layout" class="container"> 
+        <div id="layout" class="container">
             {% block body %}
             {% endblock %}
         </div>

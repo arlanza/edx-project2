@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', () => {
 
   // Login firt time access
@@ -13,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('#submit-loginname').disabled = true;
 
     document.querySelector('#text-loginname').onkeyup = () => {
-        if (document.querySelector('#name').value.length > 0)
+        if (document.querySelector('#text-loginname').value.length > 0)
           document.querySelector('#submit-loginname').disabled = false;
         else
           document.querySelector('#submit-loginname').disabled = true;
@@ -21,7 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Get text-loginname and set at localStorage
     document.querySelector('#layout').querySelector("#form-loginname").onsubmit = () => {
-        alert("Submit - Tengo nombre");
         localStorage.setItem('loginname', document.querySelector('#text-loginname').value);
 
         document.querySelector('#layout').querySelector("#form-loginname").style.visibility = "hidden";
@@ -33,7 +31,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Display the loginname
-  document.querySelector('#loginname').innerHTML = localStorage.getItem('loginname');
+  if ( localStorage.getItem('loginname') !== null)
+    document.querySelector('#loginname').innerHTML = "Hello, " + localStorage.getItem('loginname') + "!!";
 
 
 });
